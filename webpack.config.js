@@ -59,6 +59,13 @@ module.exports = {
                 plugins: ['transform-runtime']
             },
             {
+                test: /\.less$/,
+                loader: 'style' +
+                '!css?sourceMap' +
+                '!autoprefixer-loader?browsers=last 2 version' +
+                '!less?sourceMap=source-map-less-inline'
+            },
+            {
                 test: /\.(png|jpg|svg|gif)$/,
                 loader: 'file?name=img/[path][name].[ext]'
             },
