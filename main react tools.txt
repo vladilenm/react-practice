@@ -1,0 +1,1 @@
+npm install react redux react-router react-dom react-redux react-router-redux --save
