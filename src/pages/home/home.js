@@ -5,8 +5,7 @@ import {
     addTodo, 
     likeTodo, 
     deleteTodo, 
-    getTodos,
-    saveTodos
+    getTodos
 } from './actions';
 import Input from '../../components/ui/input/index';
 import Loader from '../../components/ui/loader/index';
@@ -30,9 +29,7 @@ class HomePage extends React.Component {
         };
 
         bindAll(this, ['renderTodos', 'inputOnChange', 'addTodo']);
-    }
-    
-    componentWillMount() {
+
         this.props.dispatch( getTodos() );
     }
 
@@ -41,10 +38,7 @@ class HomePage extends React.Component {
     }
 
     addTodo() {
-        const { todos } = this.props.home;
-        const id = todos[todos.length - 1].id + 1;
-        const name = this.state.todoName;
-        this.props.dispatch( addTodo(id, name) );
+        this.props.dispatch( addTodo(this.props.home.todos, this.state.todoName) );
         this.setState({ todoName: ''});
     }
 
@@ -74,15 +68,17 @@ class HomePage extends React.Component {
     
     render() {
         const { todoName } = this.state;
-        const { todos, error } = this.props.home;
+        const { todos, error, isLoading } = this.props.home;
         LS.set('todos', todos);
         return (
             <div className='row-fluid b-home'>
                 <div className='col-xs-12'>
                     <ul>
-                        {
-                            todos.length === 0 ? <Loader /> :
-                            todos.map(this.renderTodos) 
+                        { isLoading
+                            ? <Loader />
+                            : todos.length !== 0
+                                ? todos.map(this.renderTodos)
+                                : 'Элементов нет'
                         }
                     </ul>
                     <div className='col-xs-4'>
@@ -97,10 +93,6 @@ class HomePage extends React.Component {
             </div>
         );
     }
-
-    // componentWillUnmount() {
-    //
-    // }
     
 }
 
