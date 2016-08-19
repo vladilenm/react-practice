@@ -33,7 +33,7 @@ class ListPage extends React.Component {
         return (
             <div className='row'>
                 <div className='col-xs-12'>
-                    <h3>List</h3>
+                    <h3>Список видео</h3>
                     <table className='table table-bordered table-hover'>
                         <thead>
                             <tr>
