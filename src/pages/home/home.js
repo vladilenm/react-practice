@@ -76,7 +76,7 @@ class HomePage extends React.Component {
                     <ul>
                         { isLoading
                             ? <Loader />
-                            : todos.length !== 0
+                            : todos.length
                                 ? todos.map(this.renderTodos)
                                 : 'Элементов нет'
                         }
