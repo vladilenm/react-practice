@@ -1,0 +1,2 @@
+export TopAlert from './component';
+
